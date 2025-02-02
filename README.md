@@ -13,7 +13,7 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
 1. Download or clone this repository.
 2. Open `vivaldi://extensions/` (or `chrome://extensions/` in Chromium-based browsers).
 3. Enable **Developer Mode** (toggle in the top-right corner).
-4. Click **Load Unpacked** and select the `ChatterinoWatch` folder.
+4. Click **Load Unpacked** and select the `ChatterinoWatch/src` folder.
 5. Open Twitch, switch channels, and verify that Chatterino receives updates.
 
 ## Important Note About the Extension Key
