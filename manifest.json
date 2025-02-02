@@ -1,0 +1,18 @@
+{
+  "name": "ChatterinoWatch",
+  "version": "1.0",
+  "description": "Reports the currently watched Twitch channel to Chatterino.",
+  "permissions": ["nativeMessaging", "tabs", "storage"],
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.twitch.tv/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjtsADaNVdZWOwRl7Sdth0tv2vq5H9t9jVaBK8FQbs6fmZpAfgt5U4LBRI6RiI6TocxOYY0KNEdNUNmC58+3UoDn94jDViaOVszMeJeIIozDtfcpje3I5DC6pgNGJdRVwK/JMbiL+jyfc3a2ztZE36ufhfpVke192vuw12TmhYyVq+5P7c5/E2Dc8CFwDZBxLwXXlnyTZIWEHGadaWoqY5Jnjjmif5I6O4WG35Kf+GAIKNqiq03nxicpXm1UiujHxG1R5YtD0CfqjutaxsQGt7H2qWksrTC7x5EqoUI1IgPKsMYXSc/yWmkdm/viEdC0LeyYM+ivaOJRn5fECWNMrCwIDAQAB"
+}
