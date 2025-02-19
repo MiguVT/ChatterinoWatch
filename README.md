@@ -1,6 +1,6 @@
 # ChatterinoWatch
 
-ChatterinoWatch is a simple browser extension that reports the Twitch channel you are currently watching to Chatterino. Unlike other extensions, it does not modify the Twitch UI in any way—it solely sends channel information to Chatterino for seamless integration.
+ChatterinoWatch is a simple browser extension that reports the Twitch channel you are currently watching to [Chatterino](https://github.com/Chatterino/chatterino2). Unlike other extensions, it does not modify the Twitch UI in any way—it solely sends channel information to Chatterino for seamless integration.
 
 ## Features
 - Built with Manifest V3 for better security and performance.
