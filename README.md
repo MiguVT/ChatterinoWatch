@@ -11,7 +11,7 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
 
 ## Installation
 1. Open Chatterino and navigate to **Settings**.
-2. Go to the **Extensions** tab.
+2. Go to the **Browser Integration** category.
 3. In "Additional extension IDs", add the following ID:
     ```
     pnpdojeoploiomepdhikamokjmapkimh
