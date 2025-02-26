@@ -10,11 +10,13 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
 - Uses the original Chatterino extension key to function correctly.
 
 ## Installation
-1. Download or clone this repository.
-2. Open `vivaldi://extensions/` (or `chrome://extensions/` in Chromium-based browsers).
-3. Enable **Developer Mode** (toggle in the top-right corner).
-4. Click **Load Unpacked** and select the `ChatterinoWatch/src` folder.
-5. Open Twitch, switch channels, and verify that Chatterino receives updates.
+1. Open Chatterino and navigate to **Settings**.
+2. Go to the **Extensions** tab.
+3. In "Additional extension IDs", add the following ID:
+    ```
+    pnpdojeoploiomepdhikamokjmapkimh
+    ```
+4. Click **Ok** and enjoy using ChatterinoWatch!
 
 ## Important Note About the Extension Key
 Chatterino has an internal restriction that only allows extensions signed with a specific key to communicate with it. As a result, we are currently using the **key from the original Chatterino extension**. This is necessary to ensure the extension functions correctly.

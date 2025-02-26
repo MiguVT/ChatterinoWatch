@@ -1,3 +1,11 @@
+// On installation, open installation instructions
+chrome.runtime.onInstalled.addListener(details => {
+    if (details.reason === "install") {
+        chrome.tabs.create({ url: "https://github.com/miguVT/ChatterinoWatch?tab=readme-ov-file#installation" });
+    }
+});
+
+
 const appName = "com.chatterino.chatterino";
 let port = null;
 let currentChannel = null; // Cache current channel
