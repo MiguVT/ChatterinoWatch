@@ -2,7 +2,7 @@
   "name": "ChatterinoWatch",
   "version": "1.0",
   "description": "Reports the currently watched Twitch channel to Chatterino.",
-  "permissions": ["nativeMessaging", "tabs", "storage"],
+  "permissions": ["nativeMessaging", "tabs"],
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
