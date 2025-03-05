@@ -19,17 +19,10 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
 4. Click **Ok** and enjoy using ChatterinoWatch!
 ![image](https://github.com/user-attachments/assets/f5c02a0c-b4f2-4740-a117-cdd6c0dc10c3)
 
-
-
-## Important Note About the Extension Key
-Chatterino has an internal restriction that only allows extensions signed with a specific key to communicate with it. As a result, we are currently using the **key from the original Chatterino extension**. This is necessary to ensure the extension functions correctly.
-
-We plan to submit a **pull request** to allow additional extension IDs to be recognized by Chatterino, including the one used by ChatterinoWatch. Until that is approved and merged, this extension must use the original key.
-
 ## Future Improvements
 - Add support for Firefox.
-- Submit a pull request to Chatterino to allow additional extension IDs.
-- Improve compatibility with future browser updates.
+- ~Submit a pull request to Chatterino to allow additional extension IDs.~ Done!
+- ~Improve compatibility with future browser updates.~ Should be compatible with every chromium-based browser, uses Manifest V3, if future compatibility updates is needed, we will work on it.
 
 ## License
 This project is open-source and intended to enhance Chatterino’s functionality for the Twitch community.
