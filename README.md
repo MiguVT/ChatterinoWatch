@@ -17,7 +17,8 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
     pnpdojeoploiomepdhikamokjmapkimh
     ```
 4. Click **Ok** and enjoy using ChatterinoWatch!
-![image](https://github.com/user-attachments/assets/0ae67c64-0b7b-4860-b4ba-1a51cc8d2aec)
+![image](https://github.com/user-attachments/assets/f5c02a0c-b4f2-4740-a117-cdd6c0dc10c3)
+
 
 
 ## Important Note About the Extension Key
