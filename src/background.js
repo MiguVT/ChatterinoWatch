@@ -71,14 +71,6 @@ function sendToChatterino(channel, winId) {
     if (activePort) {
         activePort.postMessage(data);
         console.log("[ChatterinoWatch] Sent to Chatterino:", data);
-        
-        // Close connection after sending
-        setTimeout(() => {
-            if (port) {
-                port.disconnect();
-                port = null;
-            }
-        }, 100);
     }
 }
 
@@ -91,7 +83,9 @@ chrome.tabs.onActivated.addListener(activeInfo => {
             if (!window.focused) return;
             
             let channel = matchChannelName(tab.url);
-            sendToChatterino(channel, tab.windowId);
+            if (channel) {
+                sendToChatterino(channel, tab.windowId);
+            }
         });
     });
 });
@@ -104,6 +98,8 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (!window.focused) return;
         
         let channel = matchChannelName(changeInfo.url);
-        sendToChatterino(channel, tab.windowId);
+        if (channel) {
+            sendToChatterino(channel, tab.windowId);
+        }
     });
 });

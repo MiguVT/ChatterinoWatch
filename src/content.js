@@ -22,14 +22,30 @@
         }
     }
 
+    /**
+     * Debounce function to limit the rate at which a function can fire.
+     * @param {Function} func - The function to debounce.
+     * @param {number} wait - The number of milliseconds to wait before allowing the function to be called again.
+     * @returns {Function} The debounced function.
+     */
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    const debouncedSendChannelToBackground = debounce(sendChannelToBackground, 300);
+
     let lastPath = location.pathname;
     const observer = new MutationObserver(() => {
         if (location.pathname !== lastPath) {
             lastPath = location.pathname;
-            sendChannelToBackground();
+            debouncedSendChannelToBackground();
         }
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.querySelector('[data-a-target="video-player"]'), { childList: true, subtree: true });
     sendChannelToBackground();
 })();
