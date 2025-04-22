@@ -18,7 +18,13 @@
     function sendChannelToBackground() {
         const channel = matchChannelName(window.location.href);
         if (channel) {
-            chrome.runtime.sendMessage({ type: "location-updated", channel });
+            chrome.runtime.sendMessage({ type: "location-updated", channel }, response => {
+                if (chrome.runtime.lastError) {
+                    console.error("[ChatterinoWatch] Failed to send message:", chrome.runtime.lastError);
+                } else {
+                    console.log("[ChatterinoWatch] Message sent successfully:", response);
+                }
+            });
         }
     }
 

@@ -29,13 +29,18 @@ function getPort() {
 function connectPort() {
     if (port) return port; // Prevent multiple connections
     
-    port = chrome.runtime.connectNative(appName);
-    console.log("[ChatterinoWatch] Connected to Chatterino");
+    try {
+        port = chrome.runtime.connectNative(appName);
+        console.log("[ChatterinoWatch] Connected to Chatterino");
 
-    port.onDisconnect.addListener(() => {
-        console.log("[ChatterinoWatch] Disconnected from Chatterino", chrome.runtime.lastError);
+        port.onDisconnect.addListener(() => {
+            console.log("[ChatterinoWatch] Disconnected from Chatterino", chrome.runtime.lastError);
+            port = null;
+        });
+    } catch (error) {
+        console.error("[ChatterinoWatch] Failed to connect to Chatterino:", error);
         port = null;
-    });
+    }
 
     return port;
 }
@@ -74,17 +79,36 @@ function sendToChatterino(channel, winId) {
     }
 }
 
+// Debounce function to limit the rate at which a function can fire
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+const debouncedSendToChatterino = debounce(sendToChatterino, 300);
+
 // Detect active tab changes
 chrome.tabs.onActivated.addListener(activeInfo => {
     chrome.tabs.get(activeInfo.tabId, tab => {
+        if (chrome.runtime.lastError) {
+            console.error("[ChatterinoWatch] Failed to get tab:", chrome.runtime.lastError);
+            return;
+        }
         if (!tab || !tab.url) return;
 
         chrome.windows.get(tab.windowId, {}, window => {
+            if (chrome.runtime.lastError) {
+                console.error("[ChatterinoWatch] Failed to get window:", chrome.runtime.lastError);
+                return;
+            }
             if (!window.focused) return;
             
             let channel = matchChannelName(tab.url);
             if (channel) {
-                sendToChatterino(channel, tab.windowId);
+                debouncedSendToChatterino(channel, tab.windowId);
             }
         });
     });
@@ -95,11 +119,15 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (!changeInfo.url) return;
     
     chrome.windows.get(tab.windowId, {}, window => {
+        if (chrome.runtime.lastError) {
+            console.error("[ChatterinoWatch] Failed to get window:", chrome.runtime.lastError);
+            return;
+        }
         if (!window.focused) return;
         
         let channel = matchChannelName(changeInfo.url);
         if (channel) {
-            sendToChatterino(channel, tab.windowId);
+            debouncedSendToChatterino(channel, tab.windowId);
         }
     });
 });
