@@ -1,16 +1,20 @@
-// On installation, open installation instructions
+/**
+ * On installation, open installation instructions
+ */
 chrome.runtime.onInstalled.addListener(details => {
     if (details.reason === "install") {
         chrome.tabs.create({ url: "https://github.com/miguVT/ChatterinoWatch?tab=readme-ov-file#installation" });
     }
 });
 
-
 const appName = "com.chatterino.chatterino";
 let port = null;
 let currentChannel = null; // Cache current channel
 
-// Get the port for communication with Chatterino
+/**
+ * Get the port for communication with Chatterino
+ * @returns {Port} The port for communication
+ */
 function getPort() {
     if (!port) {
         connectPort();
@@ -18,7 +22,10 @@ function getPort() {
     return port;
 }
 
-// Connect to Chatterino
+/**
+ * Connect to Chatterino
+ * @returns {Port} The port for communication
+ */
 function connectPort() {
     if (port) return port; // Prevent multiple connections
     
@@ -33,13 +40,21 @@ function connectPort() {
     return port;
 }
 
-// Extract the Twitch channel name from the URL
+/**
+ * Extract the Twitch channel name from the URL
+ * @param {string} url - The URL to extract the channel name from
+ * @returns {string|null} The extracted channel name or null if not found
+ */
 function matchChannelName(url) {
     const match = url.match(/^https?:\/\/(?:www\.)?twitch\.tv\/(\w+)\/?(?:\?.*)?$/);
     return match ? match[1] : null;
 }
 
-// Send channel information to Chatterino
+/**
+ * Send channel information to Chatterino
+ * @param {string} channel - The channel name to send
+ * @param {number} winId - The window ID
+ */
 function sendToChatterino(channel, winId) {
     if (!channel || channel === currentChannel) return; // Skip if same channel
     currentChannel = channel;

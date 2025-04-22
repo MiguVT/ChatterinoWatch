@@ -26,4 +26,3 @@ ChatterinoWatch is a simple browser extension that reports the Twitch channel yo
 
 ## License
 This project is open-source and intended to enhance Chatterino’s functionality for the Twitch community.
-
