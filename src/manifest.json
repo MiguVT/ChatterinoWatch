@@ -1,6 +1,6 @@
 {
   "name": "ChatterinoWatch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Reports the currently watched Twitch channel to Chatterino.",
   "permissions": ["nativeMessaging", "tabs"],
   "manifest_version": 3,
