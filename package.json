@@ -1,9 +1,25 @@
 {
-    "scripts": {
-        "test": "jest"
-    },
-    "devDependencies": {
-        "jest": "^29.7.0",
-        "jest-environment-jsdom": "^29.7.0"
-    }
+  "name": "chatterino-watch",
+  "version": "1.2.0",
+  "description": "Reports the currently watched Twitch channel to Chatterino.",
+  "scripts": {
+    "test": "jest",
+    "build": "node scripts/build.js",
+    "build:chrome": "node scripts/build.js chrome",
+    "build:firefox": "node scripts/build.js firefox",
+    "dev": "node scripts/dev.js",
+    "validate": "node scripts/validate.js",
+    "package:chrome": "cd dist/chrome && zip -r ../chatterino-watch-chrome.zip .",
+    "package:firefox": "cd dist/firefox && zip -r ../chatterino-watch-firefox.xpi .",
+    "package:all": "npm run package:chrome && npm run package:firefox"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "fs-extra": "^11.2.0",
+    "chokidar": "^3.5.3"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.10.0"
+  }
 }

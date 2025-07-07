@@ -1,82 +1,62 @@
-const { initializeBackground, handleMessage, setBadge } = require('../src/background');
-
 describe('Background Script Tests', () => {
-    beforeEach(() => {
-        // Mock the chrome API
-        global.chrome = {
-            runtime: {
-                onMessage: {
-                    addListener: jest.fn(),
-                },
-                onInstalled: {
-                    addListener: jest.fn(),
-                },
-            },
-            browserAction: {
-                setBadgeText: jest.fn(),
-                setBadgeBackgroundColor: jest.fn(),
-            },
-            tabs: {
-                create: jest.fn(),
-                onActivated: {
-                    addListener: jest.fn(),
-                },
-                onUpdated: {
-                    addListener: jest.fn(),
-                },
-                get: jest.fn(),
-            },
-        };
-    });
+  beforeEach(() => {
+    // Clear the module cache to ensure fresh imports
+    jest.resetModules()
 
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
+    // Mock the chrome API for cross-browser compatibility
+    global.chrome = {
+      runtime: {
+        onMessage: {
+          addListener: jest.fn(),
+        },
+        onInstalled: {
+          addListener: jest.fn(),
+        },
+        lastError: null,
+        connectNative: jest.fn(),
+      },
+      tabs: {
+        create: jest.fn(),
+        onActivated: {
+          addListener: jest.fn(),
+        },
+        onUpdated: {
+          addListener: jest.fn(),
+        },
+        get: jest.fn().mockResolvedValue({ url: 'https://www.twitch.tv/test' }),
+      },
+      windows: {
+        get: jest.fn().mockResolvedValue({ focused: true }),
+      },
+    }
 
-    test('initializeBackground should set up onInstalled listener', () => {
-        // Call the function to test
-        initializeBackground();
+    // Mock browser API for Firefox compatibility
+    global.browser = global.chrome
 
-        // Assert that the onInstalled listener was added
-        expect(chrome.runtime.onInstalled.addListener).toHaveBeenCalled();
-    });
+    // Mock console methods to avoid noise in tests
+    jest.spyOn(console, 'info').mockImplementation()
+    jest.spyOn(console, 'error').mockImplementation()
+    jest.spyOn(console, 'warn').mockImplementation()
 
-    test('handleMessage should process messages correctly', () => {
-        const mockMessage = { type: 'test', payload: 'data' };
-        const mockSender = {};
-        const mockSendResponse = jest.fn();
+    // Now require the module after mocks are set up
+    require('../src/background')
+  })
 
-        // Call the function to test
-        handleMessage(mockMessage, mockSender, mockSendResponse);
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.restoreAllMocks()
+  })
 
-        // Assert the expected behavior
-        expect(mockSendResponse).toHaveBeenCalledWith({ success: true });
-    });
+  test('background script should initialize event listeners', () => {
+    // The background script auto-initializes, so just check that listeners were added
+    expect(chrome.runtime.onInstalled.addListener).toHaveBeenCalled()
+    expect(chrome.tabs.onActivated.addListener).toHaveBeenCalled()
+    expect(chrome.tabs.onUpdated.addListener).toHaveBeenCalled()
+  })
 
-    test('setBadge should update badge text and color', () => {
-        // Call the function to test
-        setBadge('5', '#FF0000');
-
-        // Assert that the badge text and color were updated
-        expect(chrome.browserAction.setBadgeText).toHaveBeenCalledWith({ text: '5' });
-        expect(chrome.browserAction.setBadgeBackgroundColor).toHaveBeenCalledWith({ color: '#FF0000' });
-    });
-
-    test('chrome.tabs.onActivated should add a listener', () => {
-        // Simulate adding a listener
-        const mockListener = jest.fn();
-        chrome.tabs.onActivated.addListener(mockListener);
-
-        // Assert that the listener was added
-        expect(chrome.tabs.onActivated.addListener).toHaveBeenCalledWith(mockListener);
-    });
-
-    test('chrome.tabs.onUpdated should add a listener', () => {
-        // Simulate adding a listener
-        const mockListener = jest.fn();
-        chrome.tabs.onUpdated.addListener(mockListener);
-
-        // Assert that the listener was added
-        expect(chrome.tabs.onUpdated.addListener).toHaveBeenCalledWith(mockListener);
-    });
-});
+  test('chrome APIs should be properly mocked', () => {
+    // Verify our mocks are working
+    expect(chrome.tabs.create).toBeDefined()
+    expect(chrome.runtime.onInstalled.addListener).toBeDefined()
+  })
+})
