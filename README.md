@@ -22,7 +22,7 @@ Any browser that supports Manifest V3 can run this extension - including Chrome,
 ### From Browser Stores
 
 - **Chrome Web Store**: [Install ChatterinoWatch](https://chromewebstore.google.com/detail/pnpdojeoploiomepdhikamokjmapkimh)
-- **Firefox Add-ons**: [Install ChatterinoWatch](https://addons.mozilla.org) _(coming soon)_
+- **Firefox Add-ons**: [Install ChatterinoWatch](https://addons.mozilla.org/en-US/firefox/addon/chatterinowatch/)
 
 ### Manual Installation (Development, advanced users)
 
