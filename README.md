@@ -1,6 +1,6 @@
 # ChatterinoWatch
 
-**ChatterinoWatch** is a cross-browser extension that reports the Twitch channel you're currently watching to [Chatterino](https://github.com/Chatterino/chatterino2).
+**ChatterinoWatch** is a cross-browser extension that reports the Twitch channel you're currently watching to [Chatterino](https://github.com/Chatterino/chatterino2) (or any fork, most common forks are [Chatterino7](https://github.com/SevenTV/chatterino7), [technorino](https://github.com/2547techno/technorino), [dankerino](https://github.com/Mm2PL/dankerino) and [Chatterino Homies](https://chatterinohomies.com/)).
 Unlike other extensions, it doesn't modify the Twitch UI in any way — it only sends channel information for seamless integration.
 
 **Now fully compatible with both Chrome and Firefox!**
